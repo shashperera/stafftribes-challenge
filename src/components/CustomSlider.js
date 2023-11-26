@@ -5,7 +5,6 @@ import Slider from 'rc-slider';
 const daysOfWeek = ['Day 01', 'Day 02', 'Day 03', 'Day 04', 'Day 05', 'Day 06', 'Day 07'];
 
 function CustomSlider({ value, onChange }) {
-  const trackStyle = { backgroundColor: '#1890ff' };
   const handleStyle = { borderColor: '#1890ff' };
   const railStyle = { backgroundColor: '#bfbfbf' };
 
@@ -13,7 +12,7 @@ function CustomSlider({ value, onChange }) {
     // Ensure that the first range ends on values[1] without connecting with the second range
     const transformedValues = [
       [values[0], values[1]],
-      [values[1] + 1, values[1] + 2], // Set the second range to start from values[1] without connecting
+      [values[2], values[3]],
     ];
     onChange(transformedValues);
   };
@@ -26,9 +25,12 @@ function CustomSlider({ value, onChange }) {
       step={1}
       value={value}
       onChange={handleChange}
-      trackStyle={[trackStyle, trackStyle]}
       handleStyle={[handleStyle, handleStyle]}
       railStyle={railStyle}
+      trackStyle={[
+        { backgroundColor: '#1890ff', width: `${(value[1] - value[0]) * 20}%` }, // Calculate width based on the range
+        { backgroundColor: '#bfbfbf', width: `${(value[3] - value[2]) * 20}%` }, // Calculate width based on the range
+      ]}
       marks={{
         0: daysOfWeek[0],
         1: daysOfWeek[1],
