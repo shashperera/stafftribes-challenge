@@ -1,6 +1,6 @@
 import './App.css';
 import AvailabilityResults from './components/AvailabilityResults';
-import DayAvailability from './components/DayAvailability';
+import DayAvailability from './components/DayAvailability/DayAvailability';
 
 
 
