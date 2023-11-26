@@ -1,19 +1,20 @@
+import React from 'react';
 import './App.css';
-import AvailabilityResults from './components/AvailabilityResults';
+import AvailabilityResults from './components/FriendsAvailability/AvailabilityResults';
 import DayAvailability from './components/DayAvailability/DayAvailability';
-
-
 
 function App() {
   return (
     <div className="App">
-      <div class="cardresults">
-        {/* <AvailabilityResults/> */}
+      <div className="card">
+        <h2>My Friends</h2>
+        <AvailabilityResults />
       </div>
-     <div>
-      <h2> My Availability for the next 7 weeks</h2>
-      <DayAvailability/>
-     </div>
+
+      <div className="card">
+        <h2>My Availability for the next 7 weeks</h2>
+        <DayAvailability />
+      </div>
     </div>
   );
 }

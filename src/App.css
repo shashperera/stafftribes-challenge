@@ -1,6 +1,22 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column; /* Updated to column */
+  justify-content: space-around;
+  align-items: center; /* Center the cards horizontally */
+  padding: 20px;
 }
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Optional: Set a fixed width for the cards */
+}
+
+
 
 .App-logo {
   height: 40vmin;
