@@ -1,0 +1,24 @@
+.rc-slider-handle {
+    border-color: #1890ff;
+    background-color: #1890ff;
+  }
+  
+  .rc-slider-rail {
+    background-color: #bfbfbf;
+  }
+  
+  .rc-slider-track-1 {
+    background-color: #1890ff;
+    width: 20%; 
+  }
+  
+  .rc-slider-track-2 {
+    background-color: #bfbfbf;
+    width: 20%; 
+  }
+  
+  .rc-slider-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
