@@ -6,8 +6,9 @@ import Checkbox from '@mui/material/Checkbox';
 function WeekCheckbox({ weekNumber, checked, onChange }) {
   return (
     <FormControlLabel
-      control={<Checkbox checked={checked} onChange={() => onChange(weekNumber)} />}
+      sx={{ display: 'flex', alignItems: 'center', marginRight: 4 }}
       label={`Week ${weekNumber + 1}`}
+      control={<Checkbox checked={checked} onChange={() => onChange(weekNumber)} />}
     />
   );
 }

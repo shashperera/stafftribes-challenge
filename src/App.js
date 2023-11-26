@@ -7,12 +7,12 @@ function App() {
   return (
     <div className="App">
       <div className="card">
-        <h2>My Friends</h2>
+        <h2>MY FRIENDS</h2>
         <AvailabilityResults />
       </div>
 
       <div className="card">
-        <h2>My Availability for the next 7 weeks</h2>
+        <h2>MY AVAILABILITY FOR THE NEXT 7 WEEKS</h2>
         <DayAvailability />
       </div>
     </div>
