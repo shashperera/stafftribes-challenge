@@ -7,15 +7,16 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Button } from '@mui/material';
 
 function createData(name, availability, action) {
   return { name, availability, action };
 }
 
 const rows = [
-  createData('Shashi', Week[1,2,3,4], View),
-  createData('Rakitha', 237, 9.0),
-  createData('Madhara', 262, 16.0),
+  createData('Shashi', 1, 'View'),
+  createData('Rakitha', 237, 'View'),
+  createData('Madhara', 262, 'View'),
 
 ];
 
@@ -44,8 +45,8 @@ function AvailabilityResults() {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
+              <TableCell align="right">{row.availability}</TableCell>
+              <TableCell align="right"><Button>View</Button></TableCell>
 
             </TableRow>
           ))}
