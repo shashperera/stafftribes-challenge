@@ -17,7 +17,7 @@ function App() {
       <div className="card">
         <h2>MY FRIENDS</h2>
         <Friends/>
-        <AvailabilityResults />
+        {/* <AvailabilityResults /> */}
       </div>
 
       <div className="card">

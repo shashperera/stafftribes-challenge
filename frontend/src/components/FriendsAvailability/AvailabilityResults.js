@@ -8,51 +8,45 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button } from '@mui/material';
+import Friends from './Friends';
 
-function createData(name, availability, action) {
-  return { name, availability, action };
-}
+// function createData(id, name, availability, action) {
+//   return { id, name, availability, action };
+// }
 
-const rows = [
-  createData('Shashi', 1, 'View'),
-  createData('Rakitha', 237, 'View'),
-  createData('Madhara', 262, 'View'),
+// const rows = [
+//   createData(1, 'Shashi', 1, 'View'),
+//   createData(2, 'Rakitha', 237, 'View'),
+//   createData(3, 'Madhara', 262, 'View'),
+// ];
 
-];
-
-
-function AvailabilityResults() {
-
-
+function AvailabilityResults({ id, name, availability, action }) {
   return (
     <div>
       <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell><b>Name</b></TableCell>
-            <TableCell align="right"><b>Availability</b></TableCell>
-            <TableCell align="right"><b>Action</b></TableCell>
-
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
+        <Table sx={{ minWidth: 500 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell><b>Name</b></TableCell>
+              <TableCell align="right"><b>Availability</b></TableCell>
+              <TableCell align="right"><b>Action</b></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             <TableRow
-              key={row.name}
+              key={id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {name}
               </TableCell>
-              <TableCell align="right">{row.availability}</TableCell>
+              <TableCell align="right">Weeks {availability}</TableCell>
               <TableCell align="right"><Button>View</Button></TableCell>
-
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }

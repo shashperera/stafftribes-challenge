@@ -3,9 +3,9 @@ const router = express.Router();
 
 // Sample data for friends
 const friends = [
-  { id: 1, name: 'Friend 1', availability: [1, 2, 3, 4],availableFor: 'justForFun', action: 'View' },
-  { id: 2, name: 'Friend 2', availability: [1, 2, 3, 6], availableFor: 'justForFun', action: 'View' },
-  { id: 3, name: 'Friend 3', availability: [1, 4, 5, 6], availableFor: 'moreSerious', action: 'View' },
+  { id: 1, name: 'Shashi', availability: [1, 2, 3, 4], availableFor: 'justForFun', action: 'View' },
+  { id: 2, name: 'Rakitha', availability: [1, 2, 3, 6], availableFor: 'justForFun', action: 'View' },
+  { id: 3, name: 'Madhara', availability: [1, 4, 5, 6], availableFor: 'moreSerious', action: 'View' },
 ];
 
 // Route to get friends' availability
@@ -39,14 +39,14 @@ function findCommonAvailability(friendIds) {
 
 // Route to get friends available for just for fun
 router.get('/justForFun', (req, res) => {
-    const justForFunFriends = friends.filter((friend) => friend.availableFor === 'justForFun');
-    res.json(justForFunFriends);
-  });
-  
-  // Route to get friends available for more serious events
-  router.get('/moreSerious', (req, res) => {
-    const moreSeriousFriends = friends.filter((friend) => friend.availableFor === 'moreSerious');
-    res.json(moreSeriousFriends);
-  });
+  const justForFunFriends = friends.filter((friend) => friend.availableFor === 'justForFun');
+  res.json(justForFunFriends);
+});
+
+// Route to get friends available for more serious events
+router.get('/moreSerious', (req, res) => {
+  const moreSeriousFriends = friends.filter((friend) => friend.availableFor === 'moreSerious');
+  res.json(moreSeriousFriends);
+});
 
 module.exports = router;
