@@ -1,23 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
+import AvailabilityResults from './components/AvailabilityResults';
+import DayAvailability from './components/DayAvailability';
+
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div class="cardresults">
+        {/* <AvailabilityResults/> */}
+      </div>
+     <div>
+      <h2> My Availability for the next 7 weeks</h2>
+      <DayAvailability/>
+     </div>
     </div>
   );
 }
