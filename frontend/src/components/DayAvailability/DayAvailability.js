@@ -2,9 +2,10 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Week from './Week';
 import './DayAvailability.css';
+import { Button } from '@mui/material';
 
 
-// Compoenent to manage all the weeks
+// Component to manage all the weeks
 const daysOfWeek = ['Day 01', 'Day 02', 'Day 03', 'Day 04', 'Day 05', 'Day 06', 'Day 07'];
 
 function DayAvailability() {
@@ -29,15 +30,6 @@ function DayAvailability() {
     });
   };
 
-  // //Handling of adding a new range to slider on button click
-  // const handleAddRangeClick = (weekNumber) => {
-  //   setWeeks((prevWeeks) => {
-  //     const newWeeks = [...prevWeeks];
-  //     const currentRange = newWeeks[weekNumber].selectedRanges[0];
-  //     newWeeks[weekNumber].selectedRanges.push([currentRange[1] + 1, currentRange[1] + 3]); // Add a new range
-  //     return newWeeks;
-  //   });
-  // };
 
   // Toggle of adding/removing a new range to the slider on button click
   const handleToggleRangeClick = (weekNumber) => {
@@ -57,6 +49,16 @@ function DayAvailability() {
     });
   };
 
+  const handleSaveClick = () => {
+    // Handle the save action for all weeks
+    weeks.forEach((week, index) => {
+      const selectedRanges = week.selectedRanges;
+      return selectedRanges;
+      // alert(`Week ${index + 1} - Saved Ranges: ${JSON.stringify(selectedRanges)}`);
+    });
+  };
+
+
   return (
     <Box sx={{ width: '80%', marginInlineStart: 10 }}>
       {weeks.map((week, index) => (
@@ -69,6 +71,8 @@ function DayAvailability() {
           onToggleRangeClick={handleToggleRangeClick}
         />
       ))}
+            <Button sx={{color:'#fff', float:'right', backgroundColor:'#1890ff' }} onClick={handleSaveClick}>Save</Button>
+
     </Box>
   );
 }
