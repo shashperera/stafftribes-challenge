@@ -9,7 +9,7 @@ const friends = [
 ];
 
 // Route to get friends' availability
-router.get('/', (req, res) => {
+router.get('/friends', (req, res) => {
   res.json(friends);
 });
 
@@ -26,16 +26,16 @@ router.get('/findCommonAvailability', (req, res) => {
 });
 
 // Helper function to find common availability
-function findCommonAvailability(friendIds) {
-  const friendAvailabilities = friendIds.map((id) => friends.find((friend) => friend.id == id).availability);
+// function findCommonAvailability(friendIds) {
+//   const friendAvailabilities = friendIds.map((id) => friends.find((friend) => friend.id == id).availability);
 
-  // Find common availability
-  const commonAvailability = friendAvailabilities.reduce((acc, availability) => {
-    return acc.filter((value) => availability.includes(value));
-  });
+//   // Find common availability
+//   const commonAvailability = friendAvailabilities.reduce((acc, availability) => {
+//     return acc.filter((value) => availability.includes(value));
+//   });
 
-  return commonAvailability;
-}
+//   return commonAvailability;
+// }
 
 // Route to get friends available for just for fun
 router.get('/justForFun', (req, res) => {
@@ -47,6 +47,47 @@ router.get('/justForFun', (req, res) => {
 router.get('/moreSerious', (req, res) => {
   const moreSeriousFriends = friends.filter((friend) => friend.availableFor === 'moreSerious');
   res.json(moreSeriousFriends);
+});
+
+
+// Route to get friends by availability and week
+// router.get('/:availability', (req, res) => {
+//   const availability = req.params.availability;
+//   const week = req.query.week;
+
+//   if (availability && week) {
+//     const filteredFriends = getFriendsByAvailabilityAndWeek(availability, week);
+//     res.json(filteredFriends);
+//   } else {
+//     res.status(400).json({ error: 'Availability and week are required parameters' });
+//   }
+// });
+
+// // Helper function to get friends by availability and week
+// function getFriendsByAvailabilityAndWeek(availability, week) {
+//   const filteredFriends = friends.filter((friend) => {
+//     return friend.availableFor === availability && friend.availability.includes(parseInt(week));
+//   });
+
+//   return filteredFriends;
+// }
+
+
+// Helper function to find common availability for the selected week
+function findCommonAvailabilityForWeek(week) {
+  // Return an array of friends with common availability for the week
+  return friends.filter((friend) => friend.availability.includes(parseInt(week)));
+}
+
+router.get('/findCommonAvailabilityForWeek', (req, res) => {
+  const week = req.query.week;
+
+  if (week) {
+    const commonAvailabilityForWeek = findCommonAvailabilityForWeek(week);
+    res.json(commonAvailabilityForWeek);
+  } else {
+    res.status(400).json({ error: 'Week is a required parameter' });
+  }
 });
 
 module.exports = router;
