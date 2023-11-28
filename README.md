@@ -16,4 +16,8 @@ PORT - 5000
 
 PORT- 3000
 
-//Check my availability and compare with friends and show weeks that Im availableand they are available
+### APIS
+1. http://localhost:5000/api/friends - get all users
+2. http://localhost:5000/api/moreserious - get more serious friends category
+3. http://localhost:5000/api/findCommonAvailabilityForWeek?week=5 - select all friends available on week 5
+

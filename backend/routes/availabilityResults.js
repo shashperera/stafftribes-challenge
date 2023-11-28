@@ -67,28 +67,6 @@ router.post('/updateUserAvailability', (req, res) => {
 });
 
 
-// Route to get friends by availability and week
-// router.get('/:availability', (req, res) => {
-//   const availability = req.params.availability;
-//   const week = req.query.week;
-
-//   if (availability && week) {
-//     const filteredFriends = getFriendsByAvailabilityAndWeek(availability, week);
-//     res.json(filteredFriends);
-//   } else {
-//     res.status(400).json({ error: 'Availability and week are required parameters' });
-//   }
-// });
-
-// // Helper function to get friends by availability and week
-// function getFriendsByAvailabilityAndWeek(availability, week) {
-//   const filteredFriends = friends.filter((friend) => {
-//     return friend.availableFor === availability && friend.availability.includes(parseInt(week));
-//   });
-
-//   return filteredFriends;
-// }
-
 
 // Helper function to find common availability for the selected week
 function findCommonAvailabilityForWeek(week) {

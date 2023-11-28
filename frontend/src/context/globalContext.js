@@ -13,8 +13,11 @@ export const GlobalProvider = ({ children }) => {
   const [friends, setFriends] = useState([]);
   const [justForFunFriends, setJustForFunFriends] = useState([]); 
   const [moreSeriousFriends, setMoreSeriousFriends] = useState([]);
-  const [user, setUser] = useState([]);  // Assuming you have a state for the current user
-
+  const [user, setUser] = useState([]);
+  const [filteredFriends, setFilteredFriends] = useState([]); 
+  const [selectedCategory, setSelectedCategory] = useState('JustForFun');
+  const [selectedWeek, setSelectedWeek] = useState(null);
+  
   // Function to fetch friends data from the server
   const getFriends = async () => {
     try {
@@ -67,10 +70,38 @@ export const GlobalProvider = ({ children }) => {
       const week = weekNumber + 1; // Assuming week numbers start from 1
       const isDisabled = user.availability.includes(week);
       return isDisabled;
-
     } catch (error) {
       console.error('Error updating user availability:', error);
     }
+  };
+
+  // Function to find filtered friends by week
+  const filterFriendsByWeek = async (week) => {
+    try {
+      const response = await axios.get(`${BASE_URL}findCommonAvailabilityForWeek`, {
+        params: { week },
+      });
+      setFilteredFriends (response.data);
+    } catch (error) {
+      console.error('Error finding filtered friends by week:', error);
+      return [];
+    }
+  };
+
+  const updateSelectedCategory = async (selectedCategory) => {
+    setSelectedCategory(selectedCategory);
+    setSelectedWeek(null); // Reset selected week when changing the category
+
+    if (selectedCategory === 'JustForFun') {
+      await getJustForFunFriends();
+    } else if (selectedCategory === 'MoreSerious') {
+      await getMoreSeriousFriends();
+    }
+  };
+
+  const updateSelectedWeek = async (week) => {
+    setSelectedWeek(week);
+    await filterFriendsByWeek(week);
   };
 
   // Providing the state and functions through the context
@@ -84,6 +115,12 @@ export const GlobalProvider = ({ children }) => {
       handleCheckboxChange,
       getMoreSeriousFriends,
       getJustForFunFriends,
+      findCommonAvailability,
+      filterFriendsByWeek, 
+      selectedCategory,
+      setSelectedWeek,
+      updateSelectedCategory,
+      updateSelectedWeek
     }}>
       {children}
     </GlobalContext.Provider>
