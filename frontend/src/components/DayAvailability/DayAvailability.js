@@ -3,12 +3,14 @@ import Box from '@mui/material/Box';
 import Week from './Week';
 import './DayAvailability.css';
 import { Alert, Button } from '@mui/material';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { useGlobalContext } from '../../context/globalContext';
 
 // Component to manage all the weeks
-const daysOfWeek = ['Day 01', 'Day 02', 'Day 03', 'Day 04', 'Day 05', 'Day 06', 'Day 07'];
 
 function DayAvailability() {
+  // Access the global context
+  const { handleCheckboxChange } = useGlobalContext();
+
   // State for all weeks
   const [weeks, setWeeks] = React.useState(Array.from({ length: 7 }, (_, i) => i).map(() => ({ selectedRanges: [[0, 2], [3, 5]], sliderDisabled: false })));
   const [showAlert, setShowAlert] = React.useState(false);
@@ -22,14 +24,21 @@ function DayAvailability() {
     });
   };
 
-  // Handler for checkbox change
-  const handleCheckboxChange = (weekNumber) => {
-    setWeeks((prevWeeks) => {
-      const newWeeks = [...prevWeeks];
-      newWeeks[weekNumber].sliderDisabled = !newWeeks[weekNumber].sliderDisabled;
-      return newWeeks;
-    });
-  };
+// Handler for checkbox change
+const handleCheckboxChangeLocal = (weekNumber) => {
+  // Call the global context function
+  handleCheckboxChange(weekNumber);
+
+  // Add a console.log to see the output
+  console.log(`Checkbox changed for week ${weekNumber + 1}`);
+
+  // Update the local state if needed
+  setWeeks((prevWeeks) => {
+    const newWeeks = [...prevWeeks];
+    newWeeks[weekNumber].sliderDisabled = !newWeeks[weekNumber].sliderDisabled;
+    return newWeeks;
+  });
+};
 
   // Toggle of adding/removing a new range to the slider on button click
   const handleToggleRangeClick = (weekNumber) => {
@@ -65,11 +74,11 @@ function DayAvailability() {
           weekNumber={index}
           state={week}
           onSliderChange={handleSliderChange}
-          onCheckboxChange={handleCheckboxChange}
+          onCheckboxChange={handleCheckboxChangeLocal}
           onToggleRangeClick={handleToggleRangeClick}
         />
       ))}
-      <Button sx={{ color: '#fff', float: 'right', backgroundColor: '#1890ff' }} onClick={handleSaveClick}>
+      <Button sx={{ color: '#fff', float: 'right', backgroundColor: '#1890ff',marginTop:2 }} onClick={handleSaveClick}>
         Save
       </Button>
 

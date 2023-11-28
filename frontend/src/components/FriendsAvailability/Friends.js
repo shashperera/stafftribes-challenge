@@ -56,7 +56,6 @@ function Friends() {
       >
         <Card sx={{ padding: 2, textAlign: 'left' }}>
           <div className="filter-buttons">
-            Available For:
             <ButtonGroup sx={{ marginLeft: 2 }}>
               <Button onClick={() => handleCategoryButtonClick('JustForFun')}>
                 Just For Fun
@@ -67,7 +66,7 @@ function Friends() {
             </ButtonGroup>
           </div>
           <div className="filter-buttons" style={{ marginTop: 5 }}>
-            Available On:
+            Availability:
             <ButtonGroup sx={{ marginLeft: 2 }}>
               <Button>All</Button>
               <Button>This Week</Button>
@@ -95,7 +94,7 @@ function Friends() {
           <TableHead>
             <TableRow>
               <TableCell>
-                <pre><h3> Name                                                         Availability                                                                  Action options</h3></pre>
+                <pre><h3>Name                                                          Availability                                                                  Action options</h3></pre>
               </TableCell>
             </TableRow>
           </TableHead>

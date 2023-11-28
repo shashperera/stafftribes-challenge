@@ -8,6 +8,10 @@ const friends = [
   { id: 3, name: 'Madhara', availability: [1, 4, 5, 6], availableFor: 'moreSerious', action: 'View' },
 ];
 
+const user = [
+  { id: 4, name: 'Sanduni', availability: [1, 2, 3, 4, 5, 6, 7], availableFor: 'justForFun', action: 'View' },
+
+];
 // Route to get friends' availability
 router.get('/friends', (req, res) => {
   res.json(friends);
@@ -25,18 +29,6 @@ router.get('/findCommonAvailability', (req, res) => {
   res.json({ commonAvailability });
 });
 
-// Helper function to find common availability
-// function findCommonAvailability(friendIds) {
-//   const friendAvailabilities = friendIds.map((id) => friends.find((friend) => friend.id == id).availability);
-
-//   // Find common availability
-//   const commonAvailability = friendAvailabilities.reduce((acc, availability) => {
-//     return acc.filter((value) => availability.includes(value));
-//   });
-
-//   return commonAvailability;
-// }
-
 // Route to get friends available for just for fun
 router.get('/justForFun', (req, res) => {
   const justForFunFriends = friends.filter((friend) => friend.availableFor === 'justForFun');
@@ -47,6 +39,31 @@ router.get('/justForFun', (req, res) => {
 router.get('/moreSerious', (req, res) => {
   const moreSeriousFriends = friends.filter((friend) => friend.availableFor === 'moreSerious');
   res.json(moreSeriousFriends);
+});
+
+
+// Route to update the user's availability for a specific week
+router.post('/updateUserAvailability', (req, res) => {
+  const { week, isDisabled } = req.body;
+
+  if (!week && typeof isDisabled !== 'boolean') {
+    return res.status(400).json({ error: 'Invalid parameters' });
+  }
+
+  // Assuming user is always the first element in the 'user' array
+  const currentUser = user[0];
+
+  if (isDisabled) {
+    // Remove the week from user's availability
+    currentUser.availability = currentUser.availability.filter((day) => day !== parseInt(week));
+  } else {
+    // Add the week to user's availability if not already present
+    if (!currentUser.availability.includes(parseInt(week))) {
+      currentUser.availability.push(parseInt(week));
+    }
+  }
+
+  res.json({ success: true });
 });
 
 

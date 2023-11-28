@@ -13,14 +13,18 @@ export const GlobalProvider = ({ children }) => {
   const [friends, setFriends] = useState([]);
   const [justForFunFriends, setJustForFunFriends] = useState([]); 
   const [moreSeriousFriends, setMoreSeriousFriends] = useState([]);
-  
+  const [user, setUser] = useState([]);  // Assuming you have a state for the current user
 
   // Function to fetch friends data from the server
   const getFriends = async () => {
-    const response = await axios.get(`${BASE_URL}friends`)
-    setFriends(response.data)
-    console.log(response.data)
-}
+    try {
+      const response = await axios.get(`${BASE_URL}friends`);
+      setFriends(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching friends:', error);
+    }
+  };
 
   // Function to fetch friends filtered on availability
   const findCommonAvailability = async (friendIds) => {
@@ -35,7 +39,7 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
-  //Get friends for fun filtered out
+  // Get friends for fun filtered out
   const getJustForFunFriends = async () => {
     try {
       const response = await axios.get(`${BASE_URL}justForFun`);
@@ -46,7 +50,7 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
-  //Get more serious friends filtered out
+  // Get more serious friends filtered out
   const getMoreSeriousFriends = async () => {
     try {
       const response = await axios.get(`${BASE_URL}moreSerious`);
@@ -57,31 +61,17 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
-  // Function to get friends by availability and week
-  // const getFriendsByAvailability = async (availability, week) => {
-  //   try {
-  //     const response = await axios.get(`${BASE_URL}${availability}`, {
-  //       params: { week },
-  //     });
-  //     return response.data;
-  //   } catch (error) {
-  //     console.error(`Error fetching ${availability} friends:`, error);
-  //     return [];
-  //   }
-  // };
+  // Function to handle checkbox change
+  const handleCheckboxChange = async (weekNumber) => {
+    try {
+      const week = weekNumber + 1; // Assuming week numbers start from 1
+      const isDisabled = user.availability.includes(week);
+      return isDisabled;
 
-  // const filterFriends = async (availability, week, setFilteredFriends) => {
-  //   try {
-  //     const response = await axios.get(`/api/${availability}?week=${week}`);
-  //     setFilteredFriends(response.data);
-  //   } catch (error) {
-  //     console.error('Error fetching friends:', error);
-  //     setFilteredFriends([]);
-  //   }
-  // };
-
-  
-
+    } catch (error) {
+      console.error('Error updating user availability:', error);
+    }
+  };
 
   // Providing the state and functions through the context
   return (
@@ -90,10 +80,10 @@ export const GlobalProvider = ({ children }) => {
       getFriends,
       justForFunFriends,
       moreSeriousFriends,
-
+      user,
+      handleCheckboxChange,
       getMoreSeriousFriends,
       getJustForFunFriends,
-
     }}>
       {children}
     </GlobalContext.Provider>
