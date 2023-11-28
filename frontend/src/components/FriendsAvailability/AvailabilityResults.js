@@ -24,19 +24,19 @@ function AvailabilityResults({ name, availability, availableFor, action }) {
               </TableCell>
               <TableCell align="right">Weeks {availability.join(', ')}</TableCell>
               <TableCell align="right">
-                <IconButton onClick={action} style={{ color: '#28afd5' }}>
+                <IconButton style={{ color: '#28afd5' }}>
                   <VisibilityIcon />
                 </IconButton>
-                <IconButton onClick={action} style={{ color: '#66c427' }}>
+                <IconButton style={{ color: '#66c427' }}>
                   <SendIcon />
                 </IconButton>
-                <IconButton onClick={action} style={{ color: '#fdd62b' }}>
+                <IconButton style={{ color: '#fdd62b' }}>
                   <EmailIcon />
                 </IconButton>
-                <IconButton onClick={action} style={{ color: '#b19be0' }}>
+                <IconButton style={{ color: '#b19be0' }}>
                   <ChatBubbleIcon />
                 </IconButton>
-                <IconButton onClick={action} style={{ color: 'red' }}>
+                <IconButton style={{ color: 'red' }}>
                   <PersonRemoveIcon />
                 </IconButton>
               </TableCell>

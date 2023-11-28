@@ -2,8 +2,8 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Week from './Week';
 import './DayAvailability.css';
-import { Button } from '@mui/material';
-
+import { Alert, Button } from '@mui/material';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 // Component to manage all the weeks
 const daysOfWeek = ['Day 01', 'Day 02', 'Day 03', 'Day 04', 'Day 05', 'Day 06', 'Day 07'];
@@ -11,6 +11,7 @@ const daysOfWeek = ['Day 01', 'Day 02', 'Day 03', 'Day 04', 'Day 05', 'Day 06', 
 function DayAvailability() {
   // State for all weeks
   const [weeks, setWeeks] = React.useState(Array.from({ length: 7 }, (_, i) => i).map(() => ({ selectedRanges: [[0, 2], [3, 5]], sliderDisabled: false })));
+  const [showAlert, setShowAlert] = React.useState(false);
 
   // Handler for slider value change
   const handleSliderChange = (weekNumber, values) => {
@@ -29,7 +30,6 @@ function DayAvailability() {
       return newWeeks;
     });
   };
-
 
   // Toggle of adding/removing a new range to the slider on button click
   const handleToggleRangeClick = (weekNumber) => {
@@ -51,13 +51,11 @@ function DayAvailability() {
 
   const handleSaveClick = () => {
     // Handle the save action for all weeks
-    weeks.forEach((week, index) => {
-      const selectedRanges = week.selectedRanges;
-      return selectedRanges;
-      // alert(`Week ${index + 1} - Saved Ranges: ${JSON.stringify(selectedRanges)}`);
-    });
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 1000); // 1 second timeout
   };
-
 
   return (
     <Box sx={{ width: '80%', marginInlineStart: 10 }}>
@@ -71,8 +69,18 @@ function DayAvailability() {
           onToggleRangeClick={handleToggleRangeClick}
         />
       ))}
-            <Button sx={{color:'#fff', float:'right', backgroundColor:'#1890ff' }} onClick={handleSaveClick}>Save</Button>
+      <Button sx={{ color: '#fff', float: 'right', backgroundColor: '#1890ff' }} onClick={handleSaveClick}>
+        Save
+      </Button>
 
+      {showAlert && (
+        <Alert
+          severity="success"
+          sx={{ position: 'fixed', top: '10%', left: '80%', transform: 'translate(-50%, -50%)' }}
+        >
+          Updated your week availability
+        </Alert>
+      )}
     </Box>
   );
 }

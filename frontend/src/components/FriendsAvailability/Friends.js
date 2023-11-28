@@ -6,20 +6,22 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, ButtonGroup, MenuItem, Select } from '@mui/material';
+import { Button, ButtonGroup, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
 import { useGlobalContext } from '../../context/globalContext';
 import AvailabilityResults from './AvailabilityResults';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 
 function Friends() {
-  const { friends,
+  const {
+    friends,
     getFriends,
     getJustForFunFriends,
     justForFunFriends,
     getMoreSeriousFriends,
     moreSeriousFriends,
-    setFilteredFriends } = useGlobalContext();
+    setFilteredFriends,
+  } = useGlobalContext();
 
   const [category, setCategory] = useState('JustForFun');
 
@@ -72,15 +74,18 @@ function Friends() {
               <Button>Next Week</Button>
               <Button>Best Week</Button>
             </ButtonGroup>
-            <Select>
-              <MenuItem>Week 01</MenuItem>
-              <MenuItem>Week 02</MenuItem>
-              <MenuItem>Week 03</MenuItem>
-              <MenuItem>Week 04</MenuItem>
-              <MenuItem>Week 05</MenuItem>
-              <MenuItem>Week 06</MenuItem>
-              <MenuItem>Week 07</MenuItem>
-            </Select>
+            <FormControl sx={{ marginLeft: 2, width:800, height:50}}>
+              <InputLabel id="choose-week-label">Choose Week  </InputLabel>
+              <Select labelId="choose-week-label" style={{ width: '150px' }}>
+                <MenuItem value="Week 01">Week 01</MenuItem>
+                <MenuItem value="Week 02">Week 02</MenuItem>
+                <MenuItem value="Week 03">Week 03</MenuItem>
+                <MenuItem value="Week 04">Week 04</MenuItem>
+                <MenuItem value="Week 05">Week 05</MenuItem>
+                <MenuItem value="Week 06">Week 06</MenuItem>
+                <MenuItem value="Week 07">Week 07</MenuItem>
+              </Select>
+            </FormControl>
           </div>
         </Card>
       </Box>
@@ -90,10 +95,8 @@ function Friends() {
           <TableHead>
             <TableRow>
               <TableCell>
-                {/* <th>Name</th> */}
-                <pre><h3> Name                                                                                           Availability                             Action options</h3></pre></TableCell>
-              {/* <TableCell><th>Availability</th></TableCell>
-              <TableCell><b>Action</b></TableCell> */}
+                <pre><h3> Name                                                         Availability                                                                  Action options</h3></pre>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
