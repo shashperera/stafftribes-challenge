@@ -15,3 +15,5 @@ PORT - 5000
 - npm start   
 
 PORT- 3000
+
+//Check my availability and compare with friends and show weeks that Im availableand they are available
