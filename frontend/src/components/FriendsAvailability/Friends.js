@@ -13,7 +13,14 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 
 function Friends() {
-  const { friends, getFriends, getJustForFunFriends, justForFunFriends, getMoreSeriousFriends, moreSeriousFriends, setFilteredFriends } = useGlobalContext();
+  const { friends,
+    getFriends,
+    getJustForFunFriends,
+    justForFunFriends,
+    getMoreSeriousFriends,
+    moreSeriousFriends,
+    setFilteredFriends } = useGlobalContext();
+
   const [category, setCategory] = useState('JustForFun');
 
   useEffect(() => {
@@ -39,44 +46,44 @@ function Friends() {
 
   return (
     <div>
-    <Box
-    sx={{
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}
-  >
-    <Card sx={{ padding: 2, textAlign: 'left' }}>
-      <div className="filter-buttons">
-        Available For:
-        <ButtonGroup sx={{ marginLeft: 2 }}>
-          <Button onClick={() => handleCategoryButtonClick('JustForFun')}>
-            Just For Fun
-          </Button>
-          <Button onClick={() => handleCategoryButtonClick('MoreSerious')}>
-            More Serious
-          </Button>
-        </ButtonGroup>
-      </div>
-      <div className="filter-buttons" style={{ marginTop: 5 }}>
-        Available On:
-        <ButtonGroup sx={{ marginLeft: 2 }}>
-          <Button>All</Button>
-          <Button>This Week</Button>
-          <Button>Next Week</Button>
-          <Button>Best Week</Button>
-        </ButtonGroup>
-        <Select>
-          <MenuItem>Week 01</MenuItem>
-          <MenuItem>Week 02</MenuItem>
-          <MenuItem>Week 03</MenuItem>
-          <MenuItem>Week 04</MenuItem>
-          <MenuItem>Week 05</MenuItem>
-          <MenuItem>Week 06</MenuItem>
-          <MenuItem>Week 07</MenuItem>
-        </Select>
-      </div>
-    </Card>
-  </Box>
+      <Box
+        sx={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Card sx={{ padding: 2, textAlign: 'left' }}>
+          <div className="filter-buttons">
+            Available For:
+            <ButtonGroup sx={{ marginLeft: 2 }}>
+              <Button onClick={() => handleCategoryButtonClick('JustForFun')}>
+                Just For Fun
+              </Button>
+              <Button onClick={() => handleCategoryButtonClick('MoreSerious')}>
+                More Serious
+              </Button>
+            </ButtonGroup>
+          </div>
+          <div className="filter-buttons" style={{ marginTop: 5 }}>
+            Available On:
+            <ButtonGroup sx={{ marginLeft: 2 }}>
+              <Button>All</Button>
+              <Button>This Week</Button>
+              <Button>Next Week</Button>
+              <Button>Best Week</Button>
+            </ButtonGroup>
+            <Select>
+              <MenuItem>Week 01</MenuItem>
+              <MenuItem>Week 02</MenuItem>
+              <MenuItem>Week 03</MenuItem>
+              <MenuItem>Week 04</MenuItem>
+              <MenuItem>Week 05</MenuItem>
+              <MenuItem>Week 06</MenuItem>
+              <MenuItem>Week 07</MenuItem>
+            </Select>
+          </div>
+        </Card>
+      </Box>
 
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 500 }} aria-label="simple table">
@@ -84,7 +91,7 @@ function Friends() {
             <TableRow>
               <TableCell>
                 {/* <th>Name</th> */}
-              <pre><h3> Name                                                                                           Availability                                           Action</h3></pre></TableCell>
+                <pre><h3> Name                                                                                           Availability                             Action options</h3></pre></TableCell>
               {/* <TableCell><th>Availability</th></TableCell>
               <TableCell><b>Action</b></TableCell> */}
             </TableRow>
