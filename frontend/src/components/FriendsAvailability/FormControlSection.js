@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import FormControl from '@mui/material/FormControl';
@@ -13,24 +13,41 @@ const sharedStyle = {
 };
 
 function FormControlSection({ handleWeekChange, selectedWeek, response }) {
+  const [buttonVariant, setButtonVariant] = useState({
+    all: 'contained',
+    thisWeek: 'outlined',
+    nextWeek: 'outlined',
+    bestWeek: 'outlined'
+  });
+
+  const handleButtonClick = (value) => {
+    setButtonVariant((prevVariants) => ({
+      all: value === null ? 'contained' : 'outlined',
+      thisWeek: value === '1' ? 'contained' : 'outlined',
+      nextWeek: value === '2' ? 'contained' : 'outlined',
+      bestWeek: value === '5' ? 'contained' : 'outlined',
+    }));
+    handleWeekChange({ target: { value } });
+  };
+
   return (
     <div className="filter-buttons" style={{ marginTop: 5 }}>
       Availability:
       <ButtonGroup sx={{ ...sharedStyle }}>
-        <Button onClick={() => handleWeekChange({ target: { value: null } })}>
-          All ({response.length})
+        <Button variant={buttonVariant.all} onClick={() => handleButtonClick(null)}>
+          All 
         </Button>
-        <Button onClick={() => handleWeekChange({ target: { value: '1' } })}>
+        <Button variant={buttonVariant.thisWeek} onClick={() => handleButtonClick('1')}>
           This week ({response.length})
         </Button>
-        <Button onClick={() => handleWeekChange({ target: { value: '2' } })}>
+        <Button variant={buttonVariant.nextWeek} onClick={() => handleButtonClick('2')}>
           Next week ({response.length})
         </Button>
-        <Button onClick={() => handleWeekChange({ target: { value: '5' } })}>
+        <Button variant={buttonVariant.bestWeek} onClick={() => handleButtonClick('5')}>
           Best Week ({response.length})
         </Button>
       </ButtonGroup>
-      <FormControl sx={{ ...sharedStyle, width: 800 }} >
+      <FormControl sx={{ ...sharedStyle, width: 800 }}>
         <InputLabel id="choose-week-label">Choose Week </InputLabel>
         <Select
           labelId="choose-week-label"
