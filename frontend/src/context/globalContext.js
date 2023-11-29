@@ -82,6 +82,7 @@ export const GlobalProvider = ({ children }) => {
         params: { week },
       });
       setFilteredFriends (response.data);
+      return response.data;
     } catch (error) {
       console.error('Error finding filtered friends by week:', error);
       return [];

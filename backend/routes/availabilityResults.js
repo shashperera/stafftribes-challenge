@@ -18,16 +18,7 @@ router.get('/friends', (req, res) => {
 });
 
 // Route to find common availability
-router.get('/findCommonAvailability', (req, res) => {
-  // Get friend IDs from the request query
-  const friendIds = req.query.friends ? req.query.friends.split(',') : [];
 
-  // Find common availability
-  const commonAvailability = findCommonAvailability(friendIds);
-
-  // Response with common availability
-  res.json({ commonAvailability });
-});
 
 // Route to get friends available for just for fun
 router.get('/justForFun', (req, res) => {

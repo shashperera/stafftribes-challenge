@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import { Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { Button, ButtonGroup, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
-import { useGlobalContext } from '../../context/globalContext';
-import AvailabilityResults from './AvailabilityResults';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
+import ResponseDisplay from './ResponseDisplay';
+import AvailabilityResults from './AvailabilityResults';  // Import AvailabilityResults component
+import FilterButtons from './FilterButtons';  // Import FilterButtons component
+import FormControlSection from './FormControlSection';  // Import FormControlSection component
+import ResponseLengthDisplay from './ResponseLengthDisplay';  // Import ResponseLengthDisplay component
+import { useGlobalContext } from '../../context/globalContext';
 
 function Friends() {
   const {
@@ -20,17 +25,18 @@ function Friends() {
     justForFunFriends,
     getMoreSeriousFriends,
     moreSeriousFriends,
+    filterFriendsByWeek,
     setFilteredFriends,
   } = useGlobalContext();
 
   const [category, setCategory] = useState('JustForFun');
+  const [selectedWeek, setSelectedWeek] = useState(null);
+  const [commonFriendsCount, setCommonFriendsCount] = useState(0);
+  const [response, setResponse] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      // Get all friends initially
       await getFriends();
-
-      // Then, get Just For Fun friends
       await getJustForFunFriends();
     };
 
@@ -44,6 +50,48 @@ function Friends() {
     } else if (selectedCategory === 'MoreSerious') {
       await getMoreSeriousFriends();
     }
+
+    // Reset selected week and common friends count when changing the category
+    setSelectedWeek(null);
+    setCommonFriendsCount(0);
+  };
+
+  const handleWeekChange = async (e) => {
+    const weekValue = e.target.value;
+    setSelectedWeek(weekValue);
+    filterFriends(weekValue);
+    return weekValue;
+  };
+
+  const filterFriends = async (week) => {
+    try {
+      if (week) {
+        const response = await filterFriendsByWeek(week);
+        setResponse(response);
+        // Calculate and set the common friends count
+        setCommonFriendsCount(
+          friends.filter(
+            (friend) =>
+              justForFunFriends.some((funFriend) => funFriend._id === friend._id) &&
+              moreSeriousFriends.some((seriousFriend) => seriousFriend._id === friend._id)
+          ).length
+        );
+      } else {
+        const friendsList =
+          category === 'JustForFun'
+            ? justForFunFriends
+            : category === 'MoreSerious'
+              ? moreSeriousFriends
+              : friends;
+
+        // Reset common friends count
+        setCommonFriendsCount(0);
+
+        setResponse(friendsList);
+      }
+    } catch (error) {
+      console.error('Error filtering friends:', error);
+    }
   };
 
   return (
@@ -55,65 +103,58 @@ function Friends() {
         }}
       >
         <Card sx={{ padding: 2, textAlign: 'left' }}>
-          <div className="filter-buttons">
-            <ButtonGroup sx={{ marginLeft: 2 }}>
-              <Button onClick={() => handleCategoryButtonClick('JustForFun')}>
-                Just For Fun
-              </Button>
-              <Button onClick={() => handleCategoryButtonClick('MoreSerious')}>
-                More Serious
-              </Button>
-            </ButtonGroup>
-          </div>
-          <div className="filter-buttons" style={{ marginTop: 5 }}>
-            Availability:
-            <ButtonGroup sx={{ marginLeft: 2 }}>
-              <Button>All</Button>
-              <Button>This Week</Button>
-              <Button>Next Week</Button>
-              <Button>Best Week</Button>
-            </ButtonGroup>
-            <FormControl sx={{ marginLeft: 2, width:800, height:50}}>
-              <InputLabel id="choose-week-label">Choose Week  </InputLabel>
-              <Select labelId="choose-week-label" style={{ width: '150px' }}>
-                <MenuItem value="Week 01">Week 01</MenuItem>
-                <MenuItem value="Week 02">Week 02</MenuItem>
-                <MenuItem value="Week 03">Week 03</MenuItem>
-                <MenuItem value="Week 04">Week 04</MenuItem>
-                <MenuItem value="Week 05">Week 05</MenuItem>
-                <MenuItem value="Week 06">Week 06</MenuItem>
-                <MenuItem value="Week 07">Week 07</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
+          <FilterButtons
+            handleCategoryButtonClick={handleCategoryButtonClick}
+            handleWeekChange={handleWeekChange}
+            selectedWeek={selectedWeek}
+            response={response}
+          />
+          <FormControlSection
+            handleWeekChange={handleWeekChange}
+            selectedWeek={selectedWeek}
+            response={response}
+          />
+          {selectedWeek && <ResponseLengthDisplay response={response} />}
         </Card>
       </Box>
-
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 500 }} aria-label="simple table">
-          <TableHead>
+      <TableContainer sx={{ width: '100%' }} component={Paper}>
+        <Table style={{ minwidth: 1000}}>
+        <TableHead>
             <TableRow>
-              <TableCell>
-                <pre><h3>Name                                                          Availability                                                                  Action options</h3></pre>
+              <TableCell style={{ width: '23%' }}>
+                <Typography variant="h6">Name</Typography>
+              </TableCell>
+              <TableCell style={{ width: '60%' }}>
+                <Typography variant="h6">Availability</Typography>
+              </TableCell>
+              <TableCell style={{ width: '20%' }}>
+                <Typography variant="h6">Action options</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {(category === 'JustForFun' ? justForFunFriends :
-              (category === 'MoreSerious' ? moreSeriousFriends : friends)
-            ).map((friend) => (
-              <AvailabilityResults
-                key={friend._id}
-                name={friend.name}
-                availability={friend.availability}
-                action={friend.action}
-                indicatorColor="var(--color-green)"
-              />
-            ))}
-          </TableBody>
+              {(category === 'JustForFun'
+                ? justForFunFriends
+                : category === 'MoreSerious'
+                  ? moreSeriousFriends
+                  : friends
+              ).map((friend, index) => (
+                <AvailabilityResults
+                  key={friend._id}
+                  name={friend.name}
+                  availability={friend.availability}
+                  action={friend.action}
+                  indicatorColor="var(--color-green)"
+                // Conditionally render header only for the first row
+                />
+              ))}
+            </TableBody>
         </Table>
+
       </TableContainer>
+
     </div>
+
   );
 }
 
