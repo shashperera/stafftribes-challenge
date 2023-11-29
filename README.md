@@ -13,6 +13,8 @@ https://stafftribes-challenge.netlify.app/
 - npm start   
 PORT - 5000
 
+Backend url - https://stafftribes-backend.onrender.com
+
 ### Frontend
 - npm install
 - npm start   
