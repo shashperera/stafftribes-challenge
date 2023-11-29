@@ -6,8 +6,6 @@
 ## Live Demo
 https://stafftribes-challenge.netlify.app/
 
-![React App - Google Chrome 2023-11-29 10-42-36 (1)](https://github.com/shashperera/stafftribes-challenge/assets/40666122/72746350-582c-480b-97cf-1fe38c1a76a0)
-
 
 ## How to run
 ### Backend
@@ -15,13 +13,14 @@ https://stafftribes-challenge.netlify.app/
 - npm start   
 PORT - 5000
 
-Backend url - https://stafftribes-backend.onrender.com
+Backend url using Render - https://stafftribes-backend.onrender.com
 
 ### Frontend
 - npm install
 - npm start   
 PORT- 3000
 
+Frontend url using Netlify - https://stafftribes-challenge.netlify.app/
 ### Test APIs
 1. http://localhost:5000/api/friends - get all users
 2. http://localhost:5000/api/moreserious - get more serious friends category
