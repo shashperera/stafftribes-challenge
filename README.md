@@ -6,7 +6,7 @@
 ## Live Demo
 https://stafftribes-challenge.netlify.app/
 
-![React App - Google Chrome 2023-11-29 10-42-36 (1)](https://github.com/shashperera/stafftribes-challenge/assets/40666122/37605b3c-f031-4e25-ac14-25dae83c423d)
+![React App - Google Chrome 2023-11-29 10-42-36](https://github.com/shashperera/stafftribes-challenge/assets/40666122/fb24f648-cf25-44d1-94c0-4dfaa0096f67)
 
 ## How to run
 ### Backend
