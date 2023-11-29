@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from 'axios';
 
 // Axios to connect to the server
-// const BASE_URL = "https://stafftribes-challenge-nu.vercel.app/";
+// const BASE_URL = "https://stafftribes-backend.onrender.com/api";
 const BASE_URL = "http://localhost:5000/api/";
 
 
