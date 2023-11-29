@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from 'axios';
 
 // Axios to connect to the server
-const BASE_URL = "https://stafftribes-backend.onrender.com/api";
+let BASE_URL = "https://stafftribes-backend.onrender.com/api/";
 // const BASE_URL = "http://localhost:5000/api/";
 
 
@@ -23,7 +23,7 @@ export const GlobalProvider = ({ children }) => {
   // Function to fetch friends data from the server
   const getFriends = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}friends`);
+      const response = await axios.get(`${"https://stafftribes-backend.onrender.com/api/"}friends`);
       setFriends(response.data);
       console.log(response.data);
     } catch (error) {
