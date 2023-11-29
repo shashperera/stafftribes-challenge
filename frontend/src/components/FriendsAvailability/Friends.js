@@ -7,14 +7,12 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import { Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
-import { Button, ButtonGroup, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import ResponseDisplay from './ResponseDisplay';
-import AvailabilityResults from './AvailabilityResults';  // Import AvailabilityResults component
-import FilterButtons from './FilterButtons';  // Import FilterButtons component
-import FormControlSection from './FormControlSection';  // Import FormControlSection component
-import ResponseLengthDisplay from './ResponseLengthDisplay';  // Import ResponseLengthDisplay component
+import AvailabilityResults from './AvailabilityResults';  
+import FilterButtons from './FilterButtons';  
+import FormControlSection from './FormControlSection';  
+import ResponseLengthDisplay from './ResponseLengthDisplay'; 
 import { useGlobalContext } from '../../context/globalContext';
 
 function Friends() {

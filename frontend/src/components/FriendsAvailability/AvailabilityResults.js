@@ -14,36 +14,6 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 
 function AvailabilityResults({ name, availability, availableFor, action }) {
   return (
-      // <TableContainer component={Paper}>
-      //   <Table sx={{ minWidth: 1500 }} aria-label="simple table">
-      //     <TableBody>
-           
-      //       <TableRow>
-      //         <TableCell component="th" scope="row">
-      //           {name}
-      //         </TableCell>
-      //         <TableCell align="right">Weeks {availability.join(', ')}</TableCell>
-      //         <TableCell align="right">
-      //           <IconButton style={{ color: '#28afd5' }}>
-      //             <VisibilityIcon />
-      //           </IconButton>
-      //           <IconButton style={{ color: '#66c427' }}>
-      //             <SendIcon />
-      //           </IconButton>
-      //           <IconButton style={{ color: '#fdd62b' }}>
-      //             <EmailIcon />
-      //           </IconButton>
-      //           <IconButton style={{ color: '#b19be0' }}>
-      //             <ChatBubbleIcon />
-      //           </IconButton>
-      //           <IconButton style={{ color: 'red' }}>
-      //             <PersonRemoveIcon />
-      //           </IconButton>
-      //         </TableCell>
-      //       </TableRow>
-      //     </TableBody>
-      //   </Table>
-      // </TableContainer>
       <TableRow sx={{ width: '25%' }}>
         <TableCell sx={{ marginLeft: 50 }}>{name}</TableCell>
         <TableCell>Weeks {availability.join(', ')}</TableCell>

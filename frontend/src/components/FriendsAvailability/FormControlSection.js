@@ -6,11 +6,17 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
+const sharedStyle = {
+  marginLeft: 2,
+  height: 50,
+  color: '#1890ff'
+};
+
 function FormControlSection({ handleWeekChange, selectedWeek, response }) {
   return (
     <div className="filter-buttons" style={{ marginTop: 5 }}>
       Availability:
-      <ButtonGroup sx={{ marginLeft: 2 }}>
+      <ButtonGroup sx={{ ...sharedStyle }}>
         <Button onClick={() => handleWeekChange({ target: { value: null } })}>
           All ({response.length})
         </Button>
@@ -24,11 +30,11 @@ function FormControlSection({ handleWeekChange, selectedWeek, response }) {
           Best Week ({response.length})
         </Button>
       </ButtonGroup>
-      <FormControl sx={{ marginLeft: 2, width: 800, height: 50 }}>
+      <FormControl sx={{ ...sharedStyle, width: 800 }} >
         <InputLabel id="choose-week-label">Choose Week </InputLabel>
         <Select
           labelId="choose-week-label"
-          style={{ width: '150px' }}
+          style={{ width: '150px', height: '100%', color: '#1890ff' }}
           value={selectedWeek}
           onChange={handleWeekChange}
         >
