@@ -23,7 +23,7 @@ export const GlobalProvider = ({ children }) => {
   // Function to fetch friends data from the server
   const getFriends = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}friends`);
+      const response = await axios.get(`${ "https://stafftribes-backend.onrender.com/api"}friends`);
       setFriends(response.data);
       console.log(response.data);
     } catch (error) {
