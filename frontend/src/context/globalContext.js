@@ -15,9 +15,12 @@ export const GlobalProvider = ({ children }) => {
   const [friends, setFriends] = useState([]);
   const [justForFunFriends, setJustForFunFriends] = useState([]); 
   const [moreSeriousFriends, setMoreSeriousFriends] = useState([]);
+  // eslint-disable-next-line
   const [user, setUser] = useState([]);
+  // eslint-disable-next-line
   const [filteredFriends, setFilteredFriends] = useState([]); 
   const [selectedCategory, setSelectedCategory] = useState('JustForFun');
+  // eslint-disable-next-line
   const [selectedWeek, setSelectedWeek] = useState(null);
   
   // Function to fetch friends data from the server
@@ -34,7 +37,7 @@ export const GlobalProvider = ({ children }) => {
   // Function to fetch friends filtered on availability
   const findCommonAvailability = async (friendIds) => {
     try {
-      const response = await axios.get(`${BASE_URL}findCommonAvailability`, {
+      const response = await axios.get(`${"https://stafftribes-backend.onrender.com/api/"}findCommonAvailability`, {
         params: { friends: friendIds.join(',') },
       });
       return response.data.commonAvailability;
@@ -47,7 +50,7 @@ export const GlobalProvider = ({ children }) => {
   // Get friends for fun filtered out
   const getJustForFunFriends = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}justForFun`);
+      const response = await axios.get(`${"https://stafftribes-backend.onrender.com/api/"}justForFun`);
       setJustForFunFriends(response.data);
     } catch (error) {
       console.error('Error fetching just for fun friends:', error);
@@ -58,7 +61,7 @@ export const GlobalProvider = ({ children }) => {
   // Get more serious friends filtered out
   const getMoreSeriousFriends = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}moreSerious`);
+      const response = await axios.get(`${"https://stafftribes-backend.onrender.com/api/"}moreSerious`);
       setMoreSeriousFriends(response.data);
     } catch (error) {
       console.error('Error fetching more serious friends:', error);
@@ -80,7 +83,7 @@ export const GlobalProvider = ({ children }) => {
   // Function to find filtered friends by week
   const filterFriendsByWeek = async (week) => {
     try {
-      const response = await axios.get(`${BASE_URL}findCommonAvailabilityForWeek`, {
+      const response = await axios.get(`${"https://stafftribes-backend.onrender.com/api/"}findCommonAvailabilityForWeek`, {
         params: { week },
       });
       setFilteredFriends (response.data);
